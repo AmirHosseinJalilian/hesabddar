@@ -21,6 +21,7 @@ import {
   SaleFactorConfirmationQueryFiltersType,
   QuerySaleFactorConfirmationsResponseType,
 } from 'src/@types/sale_factor_confirmation/querySaleFactorConfirmationData';
+import { useCompanyQuery } from 'src/_req-hook/company/useCompanyQuery';
 
 type ActionsMenuProps = {
   saleFactorConfirmation?: SaleFactorConfirmationData;
@@ -120,7 +121,7 @@ export default function InvoicesListsMoadian() {
     order_by: 'id',
   });
 
-  const { isLoading, isError, data, refetch } = useSaleFactorConfirmationsQuery({
+  const { isLoading, isError, data, refetch } = useCompanyQuery({
     page: page + 1, // Add 1 to page because backend uses 1-based indexing
     per_page: pageSize,
     order: sort.order,
@@ -137,7 +138,7 @@ export default function InvoicesListsMoadian() {
   const startRowId = useMemo(() => page * pageSize + 1, [page, pageSize]);
 
   const rowsWithLocalId = useMemo(() => {
-    return (data?.data.items || []).map((item, index) => ({
+    return (data?.data || []).map((item, index) => ({
       ...item,
       rowId: startRowId + index,
     }));
@@ -274,7 +275,7 @@ export default function InvoicesListsMoadian() {
         columns={columns}
         rows={rowsWithLocalId}
         getRowId={(row) => row.id} // Use actual id for internal row operations
-        rowCount={data?.data.totalRows || 0}
+        rowCount={1 || 0}
         sortingMode="server"
         filterMode="server"
         // onFilterModelChange={handleFilter}

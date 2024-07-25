@@ -1,0 +1,21 @@
+export type CompanyData = {
+  id: number;
+  userId: number;
+  personType: number;
+  nationalID: string;
+  userFirstName: string;
+  userLastName: string;
+  name: string;
+  brandName: string;
+  ceo: string;
+  economicCode: string;
+  privateKeyPem: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  zipCode: string;
+  scln: string;
+  sbc: string;
+  crn: string;
+  image: string;
+};
